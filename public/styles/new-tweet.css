@@ -1,0 +1,47 @@
+.new-tweet {
+    background-color: #eee;
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
+    border-radius: 5px;
+    margin-left: 2em;
+    margin-right: 2em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    overflow: hidden;
+}
+
+.new-tweet h2 {
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.new-tweet hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 0.1em solid black;
+    margin: 0 0 1em;
+    padding: 0;
+}
+
+.new-tweet form {
+    width: auto;
+    margin: 0;
+}
+
+.new-tweet [name="text"] {
+    padding: 0.25em;
+    width: 100%;
+}
+
+.new-tweet [type="submit"] {
+    float: left;
+}
+
+.new-tweet .counter {
+    padding-top: 0.25em auto;
+    float: right;
+    font-size: 10pt;
+    margin: 0 auto;
+}
