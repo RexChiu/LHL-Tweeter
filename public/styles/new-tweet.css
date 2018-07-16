@@ -4,9 +4,8 @@
     border-color: grey;
     border-width: 1px;
     border-radius: 5px;
-    margin-left: 2em;
-    margin-right: 2em;
-    padding: 0.5em 0.5em 0.5em 0.5em;
+    margin: 0 2em;
+    padding: 0.5em 0.5em;
     overflow: hidden;
 }
 
@@ -40,8 +39,9 @@
 }
 
 .new-tweet .counter {
-    padding-top: 0.25em auto;
+    padding-top: 0.5em;
     float: right;
     font-size: 10pt;
     margin: 0 auto;
+    font-style: italic;
 }
