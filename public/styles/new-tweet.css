@@ -19,7 +19,7 @@
     display: block;
     height: 1px;
     border: 0;
-    border-top: 0.1em solid black;
+    border-top: 0.08em solid black;
     margin: 0 0 1em;
     padding: 0;
 }
@@ -30,18 +30,19 @@
 }
 
 .new-tweet [name="text"] {
+    display: block;
     padding: 0.25em;
     width: 100%;
 }
 
 .new-tweet [type="submit"] {
+    margin-top: 5px;
     float: left;
 }
 
 .new-tweet .counter {
-    padding-top: 0.5em;
     float: right;
     font-size: 10pt;
-    margin: 0 auto;
+    margin: 0.5em auto;
     font-style: italic;
 }
