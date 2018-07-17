@@ -1,22 +1,3 @@
-/*
-<section class="tweet-container">
-      <article class="tweet">
-        <header>
-          <img src="https://i.pinimg.com/originals/78/5c/39/785c39aa38a5867388fe432079f7808d.jpg">
-          <span class="tweet-author">Cats</span>
-          <span class="tweet-mention">@Cats</span>
-        </header>
-
-        <div class="tweet-body">Cats.</div>
-        <hr>
-
-        <footer>
-          <span class="tweet-date">10 days ago</span>
-        </footer>
-      </article>
-    </section>
-*/
-
 .tweet {
     background-color: white;
     border-style: solid;
