@@ -8,7 +8,7 @@
     opacity: 0.5;
 }
 
-.tweet header {
+.tweet .tweet-header {
     background-color: #eee;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -17,7 +17,7 @@
     flex-direction: row;
 }
 
-.tweet header img {
+.tweet .tweet-header img {
     height: 50px;
     width: 50px;
     border-radius: 5px;
@@ -51,7 +51,7 @@
     padding: 0;
 }
 
-.tweet footer {
+.tweet .tweet-footer {
     padding: 0.5em 0.5em;
     display: flex;
     flex-direction: row;
@@ -71,8 +71,4 @@
 
 .tweet:hover {
     opacity: 1;
-}
-
-.tweet:hover footer{
-    
 }
