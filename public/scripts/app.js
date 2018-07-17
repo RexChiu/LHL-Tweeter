@@ -24,12 +24,34 @@ const tweetData = {
 $(document).ready(function () {
 
     var $tweet = createTweetElement(tweetData);
+    
+    console.log($tweet[0]);
 
 });
 
-function createTweetElement(tweetObj){
+function createTweetElement(tweetObj) {
     //create empty article
     var $tempTweet = $("<article>");
     $tempTweet.addClass("tweet");
-    
+
+    //creates empty header
+    var $tempTweetHeader = $("<header>").addClass("tweet-header");
+    //creates and fills in things inside the header
+    var $tempTweetImgSrc = $("<img>").attr("src", `${tweetObj.user.avatars.regular}`);
+    var $tempAuthor = $("<span>").addClass("tweet-author").text(`${tweetObj.user.name}`);
+    var $tempMention = $("<span>").addClass("tweet-mention").text(`${tweetObj.user.handle}`);
+    //appends into header
+    $tempTweetHeader.append($tempTweetImgSrc);
+    $tempTweetHeader.append($tempAuthor);
+    $tempTweetHeader.append($tempMention);
+    //appends header into empty article
+    $tempTweet.append($tempTweetHeader);
+
+    //creates and populates div body
+    var $tempTweetBody = $("<div>").addClass("tweet-body");
+    $tempTweetBody.text(`${tweetObj.content.text}`);
+    //appends body into article
+    $tempTweet.append($tempTweetBody);
+
+    return $tempTweet;
 }
