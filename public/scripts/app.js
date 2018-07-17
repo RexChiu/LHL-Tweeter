@@ -22,16 +22,16 @@ const tweetData = [
     },
     {
         "user": {
-            "name": "Descartes",
+            "name": "Cats",
             "avatars": {
                 "small": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-                "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
+                "regular": "https://i.pinimg.com/originals/78/5c/39/785c39aa38a5867388fe432079f7808d.jpg",
                 "large": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
             },
-            "handle": "@rd"
+            "handle": "@Cats"
         },
         "content": {
-            "text": "Je pense , donc je suis"
+            "text": "Cats."
         },
         "created_at": 1461113959088
     },
