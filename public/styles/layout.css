@@ -26,7 +26,9 @@ body {
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 
- main {
+ .container {
+   display: flex;
+   flex-direction: column;
    padding-top: 20px;
    padding-bottom: 20px;
    margin: 80px auto;
