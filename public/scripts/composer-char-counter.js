@@ -7,6 +7,7 @@ $(document).ready(function () {
     newTweetTextArea.on("input", function() {
         var charRemaining = 140 - $(this).val().length;
         var counterElem = $(this).closest("form").find(".counter");
+        //styles the CSS of counter to be red if negative
         if (charRemaining < 0){
             counterElem.css("color","red");
         } else {
