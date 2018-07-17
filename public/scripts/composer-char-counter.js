@@ -7,6 +7,11 @@ $(document).ready(function () {
     newTweetTextArea.on("input", function() {
         var charRemaining = 140 - $(this).val().length;
         var counterElem = $(this).closest("form").find(".counter");
+        if (charRemaining < 0){
+            counterElem.css("color","red");
+        } else {
+            counterElem.css("color","#244751");
+        }
         counterElem.text(charRemaining);
     });
 });
