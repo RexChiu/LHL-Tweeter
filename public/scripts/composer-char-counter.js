@@ -6,13 +6,13 @@ $(document).ready(function () {
     //calculates characters remaining and updates counter
     newTweetTextArea.on("input", function() {
         var charRemaining = 140 - $(this).val().length;
-        var counterElem = $(this).closest("form").find(".counter");
+        var $counterElem = $(this).closest("form").find(".counter");
         //styles the CSS of counter to be red if negative
         if (charRemaining < 0){
-            counterElem.css("color","red");
+            $counterElem.css("color","red");
         } else {
-            counterElem.css("color","#244751");
+            $counterElem.css("color","#244751");
         }
-        counterElem.text(charRemaining);
+        $counterElem.text(charRemaining);
     });
 });
