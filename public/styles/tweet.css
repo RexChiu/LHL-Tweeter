@@ -1,0 +1,97 @@
+/*
+<section class="tweet-container">
+      <article class="tweet">
+        <header>
+          <img src="https://i.pinimg.com/originals/78/5c/39/785c39aa38a5867388fe432079f7808d.jpg">
+          <span class="tweet-author">Cats</span>
+          <span class="tweet-mention">@Cats</span>
+        </header>
+
+        <div class="tweet-body">Cats.</div>
+        <hr>
+
+        <footer>
+          <span class="tweet-date">10 days ago</span>
+        </footer>
+      </article>
+    </section>
+*/
+
+.tweet {
+    background-color: white;
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
+    border-radius: 5px;
+    margin-top: 0.5em;
+    opacity: 0.5;
+}
+
+.tweet header {
+    background-color: #eee;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.tweet header img {
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+    margin: 0.5em 0.5em;
+}
+
+.tweet .tweet-author {
+    margin-top: 0.15em;
+    font-size: 2em;
+    flex-grow: 2;
+    font-weight: bold;
+}
+
+.tweet .tweet-mention {
+    margin-top: 1em;
+    margin-right: 0.5em;
+    font-size: 1em;
+}
+
+.tweet .tweet-body {
+    word-wrap: normal;
+    margin: 1em 1em;
+}
+
+.tweet hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 0.08em solid #eee;
+    margin: 0 0;
+    padding: 0;
+}
+
+.tweet footer {
+    padding: 0.5em 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.tweet .tweet-date {
+    font-size: 0.9em;
+    flex-grow: 1;
+}
+
+.tweet .fa {
+    font-size:18px;
+    color:#00a087;
+    margin: 0 2px;
+}
+
+.tweet:hover {
+    opacity: 1;
+}
+
+.tweet:hover footer{
+    
+}
