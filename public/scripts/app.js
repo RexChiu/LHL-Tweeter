@@ -16,15 +16,21 @@ $(document).ready(function () {
         //grabs the text in the form
         let $form = $(this);
         let formInput = $(this).find("textarea").val();
+        let $errorMessage = $newTweet.find(".error-message");
+
         //if empty/null, return true
         if (!formInput) {
-            alert("Tweet cannot be empty!");
+            $errorMessage.text("Tweet cannot be empty!");
++           $errorMessage.slideDown();
             return;
-        }
-        //if form length is over 140
-        if (formInput.length > 140) {
-            alert("Tweet cannot be over 140 characters!");
+        } else if (formInput.length > 140) {
+            //if form length is over 140
+            $errorMessage.text("Tweet cannot be over 140 characters!");
++           $errorMessage.slideDown();
             return;
+        } else {
+            $errorMessage.text("");
++           $errorMessage.slideUp();
         }
 
         $.post("/tweets", $(this).serialize(), function (resp, err) {
