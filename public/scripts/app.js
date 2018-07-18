@@ -13,17 +13,24 @@ $(document).ready(function () {
     $("#submit-new-tweet").on('submit', function (event) {
         event.preventDefault();
 
-        //grabs the text in the form
+        //grabs the elements in the form
         let $form = $(this);
+        let $errorMessage = $form.find(".error-message");
         let formInput = $(this).find("textarea").val();
+
+        //resets error message
+        resetErrorMessage($errorMessage);
+        
         //if empty/null, return true
         if (!formInput) {
-            alert("Tweet cannot be empty!");
+            $errorMessage.text("Tweet cannot be empty!");
+            $errorMessage.slideDown();
             return;
         }
         //if form length is over 140
         if (formInput.length > 140) {
-            alert("Tweet cannot be over 140 characters!");
+            $errorMessage.text("Tweet cannot be over 140 characters!");
+            $errorMessage.slideDown();
             return;
         }
 
@@ -41,10 +48,20 @@ $(document).ready(function () {
 
     //event handler for the slide toggle for new tweet box
     $("#nav-bar .compose-button").on('click', function (event) {
-        $newTweet = $(".new-tweet");
+        //finds new-tweet
+        let $newTweet = $(".new-tweet");
+
+        let $errorMessage = $newTweet.find(".error-message");
+        let formInput = $(this).find("textarea").val();
+
+        //resets error message
+        resetErrorMessage($errorMessage);
+
+        //display/hide new-tweet using slide toggle
         $newTweet.slideToggle();
+
         //focus on the new tweet if expanded
-        if ($newTweet.is(":visible")){
+        if ($newTweet.is(":visible")) {
             $newTweet.find("textarea").focus();
         }
     });
@@ -107,4 +124,9 @@ function escape(str) {
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
+}
+
+function resetErrorMessage($err) {
+    $err.text("");
+    $err.slideUp();
 }
