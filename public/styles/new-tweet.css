@@ -39,6 +39,11 @@
     box-shadow: 0 0 0 2px #86BAEE;
 }
 
+.new-tweet textarea:focus {
+    box-shadow: 0 0 0 2px #86BAEE;
+    outline: none;
+}
+
 .new-tweet input {
     margin-top: 5px;
     float: left;
