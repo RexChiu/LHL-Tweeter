@@ -15,11 +15,21 @@ $(document).ready(function () {
         }
     });
 
-    //appends all the tweets onto the tweets container
-    //renderTweets(tweetData);
-
     $("#submit-new-tweet").on('submit',function (event) {
         event.preventDefault();
+
+        //grabs the text in the form
+        let formInput = $(this).find("textarea").val();
+        //if empty/null, return true
+        if (!formInput){   
+            alert("Tweet cannot be empty!");
+            return;
+        }
+        //if form length is over 140
+        if (formInput.length > 140){
+            alert("Tweet cannot be over 140 characters!");
+            return;
+        }
 
         $.post("/tweets", $(this).serialize());
     });
