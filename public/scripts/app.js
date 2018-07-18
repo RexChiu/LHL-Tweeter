@@ -18,33 +18,22 @@ $(document).ready(function () {
         let $errorMessage = $form.find(".error-message");
         let formInput = $(this).find("textarea").val();
 
-        //resets error message
-        resetErrorMessage($errorMessage);
+        //sets html error message
+        let newTweetSuccess = setErrorMessage($(".new-tweet"));
         
-        //if empty/null, return true
-        if (!formInput) {
-            $errorMessage.text("Tweet cannot be empty!");
-            $errorMessage.slideDown();
-            return;
+        if (newTweetSuccess){
+            $.post("/tweets", $(this).serialize(), function (resp, err) {
+                if (err !== "success") {
+                    console.log(err);
+                } else {
+                    //reset the form
+                    $form.find("textarea").val("");
+                    $form.find(".counter").text("140");
+                    //render everything
+                    getAndRenderTweets();
+                }
+            });
         }
-        //if form length is over 140
-        if (formInput.length > 140) {
-            $errorMessage.text("Tweet cannot be over 140 characters!");
-            $errorMessage.slideDown();
-            return;
-        }
-
-        $.post("/tweets", $(this).serialize(), function (resp, err) {
-            if (err !== "success") {
-                console.log(err);
-            } else {
-                //reset the form
-                $form.find("textarea").val("");
-                $form.find(".counter").text("140");
-                //render everything
-                getAndRenderTweets();
-            }
-        });
     });
 
     //event handler for the slide toggle for new tweet box
@@ -55,8 +44,8 @@ $(document).ready(function () {
         let $errorMessage = $newTweet.find(".error-message");
         let formInput = $(this).find("textarea").val();
 
-        //resets error message
-        resetErrorMessage($errorMessage);
+        //sets html error message
+        setErrorMessage($newTweet, true);
 
         //display/hide new-tweet using slide toggle
         $newTweet.slideToggle();
@@ -127,7 +116,25 @@ function escape(str) {
     return div.innerHTML;
 }
 
-function resetErrorMessage($err) {
-    $err.text("");
-    $err.slideUp();
+function setErrorMessage($newTweet, initialClick) {
+    let $form = $newTweet.find("#submit-new-tweet");
+    let formInput = $form.find("textarea").val();
+    let $errorMessage = $form.find(".error-message");
+
+    //if empty/null, return true
+    if (!formInput && !initialClick) {
+        $errorMessage.text("Tweet cannot be empty!");
+        $errorMessage.slideDown();
+        return false;
+    }
+    //if form length is over 140
+    if (formInput.length > 140) {
+        $errorMessage.text("Tweet cannot be over 140 characters!");
+        $errorMessage.slideDown();
+        return false;
+    }
+
+    $errorMessage.text("");
+    $errorMessage.slideUp();
+    return true;
 }
