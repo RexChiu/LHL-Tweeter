@@ -75,7 +75,8 @@ function createTweetElement(tweetObj) {
     var timeDiff = new Date().getTime() - tweetObj.created_at;
     var daysDiff = parseInt(Math.floor(timeDiff / (1000 * 60 * 60 * 24)));
 
-    var $tweet = $(`<article class="tweet">
+    var $tweet = $(
+    `<article class="tweet">
         <header class="tweet-header">
             <img src="${tweetObj.user.avatars.regular}">
             <span class="tweet-author">${tweetObj.user.name}</span>
