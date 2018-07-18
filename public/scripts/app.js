@@ -32,6 +32,7 @@ $(document).ready(function () {
                 console.log(err);
             } else {
                 //reset the form
+                $form.find(".counter").text("140");
                 $form.find("textarea").val("");
                 //render everything
                 getAndRenderTweets();
