@@ -62,11 +62,11 @@ function createTweetElement(tweetObj) {
     var $tweet = $(
     `<article class="tweet">
         <header class="tweet-header">
-            <img src="${tweetObj.user.avatars.regular}">
-            <span class="tweet-author">${tweetObj.user.name}</span>
-            <span class="tweet-mention">${tweetObj.user.handle}</span>
+            <img src="${escape(tweetObj.user.avatars.regular)}">
+            <span class="tweet-author">${escape(tweetObj.user.name)}</span>
+            <span class="tweet-mention">${escape(tweetObj.user.handle)}</span>
         </header>
-        <div class="tweet-body">${tweetObj.content.text}</div>
+        <div class="tweet-body">${escape(tweetObj.content.text)}</div>
         <hr>
         <footer class="tweet-footer">
             <span class="tweet-date">${daysDiff} days ago</span>
@@ -91,3 +91,11 @@ function getAndRenderTweets(){
         }
     });
 }
+
+//function to prevent code injection, escapes all unsafe strings
+function escape(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+  
