@@ -75,41 +75,21 @@ function createTweetElement(tweetObj) {
     var timeDiff = new Date().getTime() - tweetObj.created_at;
     var daysDiff = parseInt(Math.floor(timeDiff / (1000 * 60 * 60 * 24)));
 
-    //create empty article
-    var $tempTweet = $("<article>");
-    $tempTweet.addClass("tweet");
+    var $tweet = $(`<article class="tweet">
+        <header class="tweet-header">
+            <img src="${tweetObj.user.avatars.regular}">
+            <span class="tweet-author">${tweetObj.user.name}</span>
+            <span class="tweet-mention">${tweetObj.user.handle}</span>
+        </header>
+        <div class="tweet-body">${tweetObj.content.text}</div>
+        <hr>
+        <footer class="tweet-footer">
+            <span class="tweet-date">${daysDiff} days ago</span>
+            <i class="fa fa-flag"></i>
+            <i class="fa fa-retweet"></i>
+            <i class="fa fa-heart"></i>
+        </footer>
+    </article>`);
 
-    //creates empty header
-    var $tempTweetHeader = $("<header>").addClass("tweet-header");
-    //creates and fills in things inside the header
-    var $tempTweetImgSrc = $("<img>").attr("src", `${tweetObj.user.avatars.regular}`);
-    var $tempAuthor = $("<span>").addClass("tweet-author").text(`${tweetObj.user.name}`);
-    var $tempMention = $("<span>").addClass("tweet-mention").text(`${tweetObj.user.handle}`);
-    //appends into header
-    $tempTweetHeader.append($tempTweetImgSrc).append($tempAuthor).append($tempMention);
-    //appends header into empty article
-    $tempTweet.append($tempTweetHeader);
-
-    //creates and populates div body
-    var $tempTweetBody = $("<div>").addClass("tweet-body");
-    $tempTweetBody.text(`${tweetObj.content.text}`);
-    //appends body into article
-    $tempTweet.append($tempTweetBody);
-
-    //appends horizontal line into article
-    $tempTweet.append($("<hr>"));
-
-    //creates empty footer
-    var $tempTweetFooter = $("<footer>").addClass("tweet-footer");
-    //creates and fills in things inside the footer
-    var $tempTweetDate = $("<span>").addClass("tweet-date").text(`${daysDiff} days ago`);
-    var $tempTweetFlag = $("<i>").addClass("fa fa-flag");
-    var $tempTweetRetweet = $("<i>").addClass("fa fa-retweet");
-    var $tempTweetHeart = $("<i>").addClass("fa fa-heart");
-    //appends into footer
-    $tempTweetFooter.append($tempTweetDate).append($tempTweetFlag).append($tempTweetRetweet).append($tempTweetHeart);
-    //appends footer into article
-    $tempTweet.append($tempTweetFooter);
-
-    return $tempTweet;
+    return $tweet;
 }
