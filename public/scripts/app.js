@@ -38,6 +38,13 @@ $(document).ready(function () {
             }
         });
     });
+
+    //event handler for the slide toggle for new tweet box
+    $("#nav-bar .compose-button").on('click', function (event) {
+        $newTweet = $(".new-tweet");
+        $newTweet.slideToggle();
+        $newTweet.find("textarea").focus();
+    });
 });
 
 function renderTweets(tweets) {
