@@ -40,6 +40,7 @@ $(document).ready(function () {
             } else {
                 //reset the form
                 $form.find("textarea").val("");
+                $form.find(".counter").text("140");
                 //render everything
                 getAndRenderTweets();
             }
