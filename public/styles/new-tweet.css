@@ -34,9 +34,17 @@
     width: 100%;
 }
 
+.new-tweet textarea:hover {
+    box-shadow: 0 0 0 2px #86BAEE;
+}
+
 .new-tweet input {
     margin-top: 5px;
     float: left;
+}
+
+.new-tweet input:hover {
+    box-shadow: 0 0 0 2px #86BAEE;
 }
 
 .new-tweet .counter {
