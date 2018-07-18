@@ -8,11 +8,9 @@ $(document).ready(function () {
         var charRemaining = 140 - $(this).val().length;
         var $counterElem = $(this).closest("form").find(".counter");
         //styles the CSS of counter to be red if negative
-        if (charRemaining < 0){
-            $counterElem.css("color","red");
-        } else {
-            $counterElem.css("color","#244751");
-        }
+
+        //updates counter color and text
+        $counterElem.toggleClass("overflow", charRemaining < 0);
         $counterElem.text(charRemaining);
     });
 });

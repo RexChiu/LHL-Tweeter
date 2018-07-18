@@ -54,3 +54,7 @@
     margin: 0.5em auto;
     font-style: italic;
 }
+
+.overflow {
+    color: red;
+}
