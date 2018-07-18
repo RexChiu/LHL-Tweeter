@@ -9,10 +9,12 @@ $(document).ready(function () {
 
     getAndRenderTweets();
 
+    //event handler for the form submission
     $("#submit-new-tweet").on('submit',function (event) {
         event.preventDefault();
 
         //grabs the text in the form
+        let $form = $(this);
         let formInput = $(this).find("textarea").val();
         //if empty/null, return true
         if (!formInput){   
@@ -29,6 +31,9 @@ $(document).ready(function () {
             if (err !== "success"){
                 console.log(err);
             } else {
+                //reset the form
+                $form.find("textarea").val("");
+                //render everything
                 getAndRenderTweets();
             }
         });
