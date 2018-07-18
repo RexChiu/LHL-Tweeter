@@ -43,7 +43,10 @@ $(document).ready(function () {
     $("#nav-bar .compose-button").on('click', function (event) {
         $newTweet = $(".new-tweet");
         $newTweet.slideToggle();
-        $newTweet.find("textarea").focus();
+        //focus on the new tweet if expanded
+        if ($newTweet.is(":visible")){
+            $newTweet.find("textarea").focus();
+        }
     });
 });
 
