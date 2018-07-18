@@ -28,13 +28,13 @@
     margin: 0;
 }
 
-.new-tweet [name="text"] {
+.new-tweet textarea {
     display: block;
     padding: 0.25em;
     width: 100%;
 }
 
-.new-tweet [type="submit"] {
+.new-tweet input {
     margin-top: 5px;
     float: left;
 }
