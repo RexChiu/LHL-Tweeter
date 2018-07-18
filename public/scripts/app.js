@@ -21,16 +21,16 @@ $(document).ready(function () {
         //if empty/null, return true
         if (!formInput) {
             $errorMessage.text("Tweet cannot be empty!");
-+           $errorMessage.slideDown();
+            $errorMessage.slideDown();
             return;
         } else if (formInput.length > 140) {
             //if form length is over 140
             $errorMessage.text("Tweet cannot be over 140 characters!");
-+           $errorMessage.slideDown();
+            $errorMessage.slideDown();
             return;
         } else {
             $errorMessage.text("");
-+           $errorMessage.slideUp();
+            $errorMessage.slideUp();
         }
 
         $.post("/tweets", $(this).serialize(), function (resp, err) {
