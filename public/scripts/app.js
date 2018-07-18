@@ -52,10 +52,15 @@ const tweetData = [
     }
 ];
 
-
 $(document).ready(function () {
     //appends all the tweets onto the tweets container
     renderTweets(tweetData);
+
+    $("#submit-new-tweet").on('submit',function (event) {
+        event.preventDefault();
+
+        $.post("/tweets", $(this).serialize());
+    });
 });
 
 function renderTweets(tweets) {
