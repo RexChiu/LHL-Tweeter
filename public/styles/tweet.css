@@ -40,6 +40,7 @@
 .tweet .tweet-body {
     word-wrap: normal;
     margin: 1em 1em;
+    word-wrap: break-word;
 }
 
 .tweet hr {
