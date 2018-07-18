@@ -7,13 +7,7 @@
 $(document).ready(function () {
     let tweetData = null;
 
-    $.get("/tweets", function(resp, err){
-        if (err !== "success"){
-            console.log(err);
-        } else {
-            renderTweets(resp);
-        }
-    });
+    getAndRenderTweets();
 
     $("#submit-new-tweet").on('submit',function (event) {
         event.preventDefault();
@@ -31,7 +25,13 @@ $(document).ready(function () {
             return;
         }
 
-        $.post("/tweets", $(this).serialize());
+        $.post("/tweets", $(this).serialize(), function(resp, err){
+            if (err !== "success"){
+                console.log(err);
+            } else {
+                getAndRenderTweets();
+            }
+        });
     });
 });
 
@@ -70,4 +70,17 @@ function createTweetElement(tweetObj) {
     </article>`);
 
     return $tweet;
+}
+
+function getAndRenderTweets(){
+    //clears everything in the tweet-container
+    $(".tweet-container").empty();
+
+    $.get("/tweets", function(resp, err){
+        if (err !== "success"){
+            console.log(err);
+        } else {
+            renderTweets(resp);
+        }
+    });
 }
