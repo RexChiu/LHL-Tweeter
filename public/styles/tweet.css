@@ -67,8 +67,13 @@
     font-size:18px;
     color:#00a087;
     margin: 0 2px;
+    display: none;
 }
 
 .tweet:hover {
     opacity: 1;
+}
+
+.tweet:hover .fa{
+    display: inline;
 }
