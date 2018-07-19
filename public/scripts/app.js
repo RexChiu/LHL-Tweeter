@@ -61,14 +61,13 @@ function renderTweets(tweets) {
     //clears everything in the tweet-container
     $(".tweet-container").empty();
 
-    // loops through tweets and sorts it by date
+    // loops through tweets
     // calls createTweetElement for each tweet
     // takes return value and appends it to the tweets container
-    let sortedTweets = tweets.sort((a, b) => { return b.created_at - a.created_at; });
 
     let $tweetContainer = $(".container .tweet-container");
 
-    for (var elem of sortedTweets) {
+    for (var elem of tweets) {
         var $tweet = createTweetElement(elem);
         $tweetContainer.append($tweet);
     }
