@@ -77,6 +77,7 @@ function createTweetElement(tweetObj) {
     //calculates the difference in time for tweet creation
     var timeDiff = new Date().getTime() - tweetObj.created_at;
     var daysDiff = parseInt(Math.floor(timeDiff / (1000 * 60 * 60 * 24)));
+    if (daysDiff < 0) { daysDiff = 0; }
 
     var $tweet = $(
         `<article class="tweet">
