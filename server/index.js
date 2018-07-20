@@ -16,11 +16,12 @@ const MONGODB_URI = "mongodb://localhost:27017/tweeter";
 const nodeSassMiddleware = require("node-sass-middleware");
 
 app.use(
+  "/styles",
   nodeSassMiddleware({
     src: path.join(__dirname, "/../sass"),
-    dest: path.join(__dirname, "/../public"),
+    dest: path.join(__dirname, "/../public/styles"),
     debug: true,
-    outputStyle: "compressed"
+    outputStyle: "expanded"
   })
 );
 
