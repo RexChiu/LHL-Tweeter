@@ -27,6 +27,14 @@ module.exports = function makeDataHelpers(db) {
           }
           callback(null, tweets.sort(sortNewestFirst));
         });
+    },
+
+    // Changes the like count of selected tweet using mongodb update() and $inc
+    modifyLikes: function(id, change, callback) {
+      let err = db
+        .collection("tweets")
+        .update({ _id: ObjectId(id) }, { $inc: { likes: change } });
+      callback(err.writeConcernError);
     }
   };
 };

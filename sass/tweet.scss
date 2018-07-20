@@ -80,6 +80,15 @@
   display: inline;
 }
 
+.tweet:hover .tweet-num-likes {
+  margin-left: 0.1em;
+  display: inLine;
+}
+
 .tweet .fa-heart.liked-tweet {
   color: red;
+}
+
+.tweet .tweet-num-likes {
+  display: none;
 }

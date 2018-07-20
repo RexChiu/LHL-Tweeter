@@ -8,11 +8,9 @@ const bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
 
-// Using MongoDB as database
+// Dependencies
 const MongoClient = require("mongodb").MongoClient;
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";
-
-//SCSS middleware
 const nodeSassMiddleware = require("node-sass-middleware");
 
 app.use(

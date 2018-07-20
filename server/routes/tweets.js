@@ -42,5 +42,25 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  tweetsRoutes.put("/", function(req, res) {
+    if (!req.body.id) {
+      res.status(401).json({ error: "invalid request: no data in PUT body" });
+      return;
+    }
+
+    const id = req.body.id;
+    const change = req.body.change;
+
+    // DataHelpers.modifyLikes(id, change, err => {
+    //   if (err) {
+    //     res.status(500).json({ error: err });
+    //   } else {
+    //     res.status(200).send();
+    //   }
+    // });
+
+    res.status(200).send();
+  });
+
   return tweetsRoutes;
 };

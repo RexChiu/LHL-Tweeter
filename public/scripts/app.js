@@ -62,7 +62,44 @@ $(document).ready(function() {
 
   //event handler for clicking the like button
   $(".tweet-container").on("click", ".fa-heart", function(event) {
-    $(this).toggleClass("liked-tweet");
+    let $likeButton = $(".tweet-container .fa-heart");
+    let change = null;
+    let id = $(this)
+      .closest(".tweet")
+      .data("id");
+
+    //if already liked, decrement
+    if ($likeButton.hasClass("liked-tweet")) {
+      change = -1;
+    } else {
+      change = 1;
+    }
+
+    //construct body
+    let data = {
+      id: id,
+      change: change
+    };
+
+    console.log(JSON.stringify(data));
+
+    // $.post("/tweets?_method=PUT", JSON.stringify(data))
+    //   .done(function(msg) {
+    //     console.log("Success: " + msg);
+    //   })
+    //   .fail(function(err, res) {
+    //     console.log("Error: " + JSON.stringify(err));
+    //   });
+
+    $.ajax({
+      url: "/tweets",
+      type: "PUT",
+      data: data,
+      success: function(err, resp) {
+        console.log("Error: " + err);
+        console.log("Resp: " + resp);
+      }
+    });
   });
 });
 
@@ -104,6 +141,7 @@ function createTweetElement(tweetObj) {
             <i class="fa fa-flag"></i>
             <i class="fa fa-retweet"></i>
             <i class="fa fa-heart"></i>
+            <span class="tweet-num-likes">${escape(tweetObj.likes)}</span>
         </footer>
     </article>`
   );
