@@ -1,3 +1,5 @@
+db.tweets.deleteMany({})
+
 db.tweets.insertMany(
 [{
     "user": {
