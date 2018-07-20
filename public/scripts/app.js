@@ -62,42 +62,42 @@ $(document).ready(function() {
 
   //event handler for clicking the like button
   $(".tweet-container").on("click", ".fa-heart", function(event) {
-    let $likeButton = $(".tweet-container .fa-heart");
+    //grabs button, tweet id, and likes from tweet
+    let $likeButton = $(this);
     let change = null;
     let id = $(this)
       .closest(".tweet")
       .data("id");
+    let numLikes = $likeButton.siblings(".tweet-num-likes").text();
 
-    //if already liked, decrement
+    //if already liked, change is -1, otherwise +1
     if ($likeButton.hasClass("liked-tweet")) {
       change = -1;
     } else {
       change = 1;
     }
 
-    //construct body
+    //construct data payload
     let data = {
       id: id,
       change: change
     };
 
-    console.log(JSON.stringify(data));
-
-    // $.post("/tweets?_method=PUT", JSON.stringify(data))
-    //   .done(function(msg) {
-    //     console.log("Success: " + msg);
-    //   })
-    //   .fail(function(err, res) {
-    //     console.log("Error: " + JSON.stringify(err));
-    //   });
-
+    //sends a PUT request to server
+    //if success, change color of heart, increment/decrement likes accordingly
     $.ajax({
       url: "/tweets",
       type: "PUT",
       data: data,
       success: function(err, resp) {
-        console.log("Error: " + err);
-        console.log("Resp: " + resp);
+        if (err) {
+          console.log(err);
+        } else {
+          $likeButton.toggleClass("liked-tweet");
+          $likeButton
+            .siblings(".tweet-num-likes")
+            .text(Number(numLikes) + Number(change));
+        }
       }
     });
   });

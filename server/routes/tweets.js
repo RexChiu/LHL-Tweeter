@@ -30,7 +30,8 @@ module.exports = function(DataHelpers) {
       content: {
         text: req.body.text
       },
-      created_at: Date.now()
+      created_at: Date.now(),
+      likes: 0
     };
 
     DataHelpers.saveTweet(tweet, err => {
@@ -51,13 +52,13 @@ module.exports = function(DataHelpers) {
     const id = req.body.id;
     const change = req.body.change;
 
-    // DataHelpers.modifyLikes(id, change, err => {
-    //   if (err) {
-    //     res.status(500).json({ error: err });
-    //   } else {
-    //     res.status(200).send();
-    //   }
-    // });
+    DataHelpers.modifyLikes(id, change, err => {
+      if (err) {
+        res.status(500).json({ error: err });
+      } else {
+        res.status(200).send();
+      }
+    });
 
     res.status(200).send();
   });

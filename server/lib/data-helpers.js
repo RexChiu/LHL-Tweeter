@@ -31,9 +31,12 @@ module.exports = function makeDataHelpers(db) {
 
     // Changes the like count of selected tweet using mongodb update() and $inc
     modifyLikes: function(id, change, callback) {
+      var ObjectID = require("mongodb").ObjectID(id);
+
       let err = db
         .collection("tweets")
-        .update({ _id: ObjectId(id) }, { $inc: { likes: change } });
+        .update({ _id: ObjectID }, { $inc: { likes: Number(change) } });
+
       callback(err.writeConcernError);
     }
   };
