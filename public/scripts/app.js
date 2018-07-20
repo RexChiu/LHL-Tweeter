@@ -20,8 +20,10 @@ $(document).ready(function() {
       .val();
     let $errorMessage = $newTweet.find(".error-message");
 
+    //removes empty space/line breaks from front and end of
+
     //if empty/null, return true
-    if (!formInput) {
+    if (!formInput.trim()) {
       $errorMessage.text("Tweet cannot be empty!");
       $errorMessage.slideDown();
       return;
