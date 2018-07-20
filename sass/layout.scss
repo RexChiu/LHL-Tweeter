@@ -32,7 +32,27 @@ body {
   display: flex;
   flex-direction: column;
   padding: 20px 2em;
+  width: 35em;
   margin: 80px auto;
-  width: 450px;
   background-color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .nav-bar {
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .nav-bar .logo {
+    margin-top: 0.5em 0.5em;
+    height: 4em;
+    width: 4em;
+    align-self: center;
+  }
+
+  .container {
+    width: 100%;
+  }
 }

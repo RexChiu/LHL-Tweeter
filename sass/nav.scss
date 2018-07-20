@@ -1,29 +1,36 @@
-#nav-bar {
+.nav-bar {
   background-color: #00a087;
   color: #e8fdff;
   top: 0px;
-  position: fixed;
-  height: 80px;
   width: 100%;
-  padding-left: 2em;
-  padding-right: 2em;
+  position: fixed;
   z-index: 1000;
   display: flex;
 }
 
-#nav-bar .logo {
-  width: 80px;
-  height: 80px;
+@media (min-width: 501px) {
+  .nav-bar {
+    height: 80px;
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+
+  .nav-bar .logo {
+    width: 5em;
+    height: 5em;
+    max-width: 80px;
+    max-height: 80px;
+  }
 }
 
-#nav-bar .header {
+.nav-bar .header {
   padding-left: 10px;
   font-size: 200%;
   line-height: 250%;
   flex-grow: 1;
 }
 
-#nav-bar .compose-button {
+.nav-bar .compose-button {
   cursor: pointer;
   justify-content: flex-end;
   margin: 0.5em;
@@ -38,7 +45,7 @@
   color: #00a087;
 }
 
-#nav-bar .compose-button:hover {
+.nav-bar .compose-button:hover {
   background-color: white;
   color: black;
 }
