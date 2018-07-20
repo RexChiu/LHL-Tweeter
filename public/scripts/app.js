@@ -59,6 +59,11 @@ $(document).ready(function() {
       $newTweet.find("textarea").focus();
     }
   });
+
+  //event handler for clicking the like button
+  $(".tweet-container").on("click", ".fa-heart", function(event) {
+    $(this).toggleClass("liked-tweet");
+  });
 });
 
 function renderTweets(tweets) {
@@ -86,7 +91,7 @@ function createTweetElement(tweetObj) {
   }
 
   var $tweet = $(
-    `<article class="tweet">
+    `<article class="tweet" data-id="${escape(tweetObj._id)}">
         <header class="tweet-header">
             <img src="${escape(tweetObj.user.avatars.regular)}">
             <span class="tweet-author">${escape(tweetObj.user.name)}</span>

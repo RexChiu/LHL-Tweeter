@@ -79,3 +79,7 @@
 .tweet:hover .fa {
   display: inline;
 }
+
+.tweet .fa-heart.liked-tweet {
+  color: red;
+}
