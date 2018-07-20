@@ -43,7 +43,7 @@ module.exports = function(DataHelpers) {
     });
   });
 
-  tweetsRoutes.put("/", function(req, res) {
+  tweetsRoutes.put("/likes", function(req, res) {
     if (!req.body.id) {
       res.status(401).json({ error: "invalid request: no data in PUT body" });
       return;

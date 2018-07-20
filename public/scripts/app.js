@@ -86,7 +86,7 @@ $(document).ready(function() {
     //sends a PUT request to server
     //if success, change color of heart, increment/decrement likes accordingly
     $.ajax({
-      url: "/tweets",
+      url: "/tweets/likes",
       type: "PUT",
       data: data,
       success: function(err, resp) {
