@@ -6,13 +6,23 @@ const PORT = 8080;
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+const path = require('path');
 
 // Using MongoDB as database
 const MongoClient = require("mongodb").MongoClient;
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";
+
+//SCSS middleware
+const sassMiddleware = require('node-sass-middleware');
+app.use(sassMiddleware({
+  src: __dirname + '/styles',
+  dest: __dirname + '/public/styles',
+  debug: false,
+  outputStyle: 'compressed'
+}));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 //Connect to MongoDB, once connected, pass through to DataHelpers
 MongoClient.connect(MONGODB_URI, (err, db) => {
