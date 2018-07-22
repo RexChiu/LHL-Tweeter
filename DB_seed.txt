@@ -4,11 +4,7 @@ db.tweets.insertMany(
 [{
     "user": {
       "name": "Cats",
-      "avatars": {
-        "small": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://i.pinimg.com/originals/78/5c/39/785c39aa38a5867388fe432079f7808d.jpg",
-        "large": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
+      "avatar": "https://i.pinimg.com/originals/78/5c/39/785c39aa38a5867388fe432079f7808d.jpg",
       "handle": "@Cats"
     },
     "content": {
@@ -20,11 +16,7 @@ db.tweets.insertMany(
   {
     "user": {
       "name": "Newton",
-      "avatars": {
-        "small": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
+      "avatar": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
       "handle": "@SirIsaac"
     },
     "content": {
@@ -36,11 +28,7 @@ db.tweets.insertMany(
   {
     "user": {
       "name": "Descartes",
-      "avatars": {
-        "small": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        "large": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
+      "avatar": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
       "handle": "@rd"
     },
     "content": {
@@ -52,11 +40,7 @@ db.tweets.insertMany(
   {
     "user": {
       "name": "Johann von Goethe",
-      "avatars": {
-        "small": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        "large": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
+      "avatar": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
       "handle": "@johann49"
     },
     "content": {
@@ -72,12 +56,14 @@ db.users.deleteMany({})
 db.users.insertMany(
 [{
     "email": "Cats@Cats.Cats",
+    "password": "$2a$10$oWzIoz9BZNEAPU0R2zI3t.skcopb2rt5E3Q7GMIGWeFjhKFJjLBRS",
     "handle": "@Cats",
-    "password": "$2a$10$oWzIoz9BZNEAPU0R2zI3t.skcopb2rt5E3Q7GMIGWeFjhKFJjLBRS"
+    "avatar": "https://i.pinimg.com/originals/78/5c/39/785c39aa38a5867388fe432079f7808d.jpg"
   },
   {
     "email": "Dogs@Dogs.Dogs",
+    "password": "$2a$10$SRFKUDGYxCg.z71oKoww4OXpRgek/lKDuzkk2yooVKCvSOmOuSu7C",
     "handle": "@Dogs",
-    "password": "$2a$10$SRFKUDGYxCg.z71oKoww4OXpRgek/lKDuzkk2yooVKCvSOmOuSu7C"
+    "avatar": "https://samoyedlife.com/images/photos/happy-samoyed.jpg"
   }
 ])

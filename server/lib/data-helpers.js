@@ -38,6 +38,32 @@ module.exports = function makeDataHelpers(db) {
         .update({ _id: ObjectID }, { $inc: { likes: Number(change) } });
 
       callback(err.writeConcernError);
+    },
+
+    //checks if user exists in the database
+    findUser: function(email, callback) {
+      if (email === undefined) {
+        callback(null, null);
+      }
+
+      //search DB and return results
+      //user will be null if does not exist
+      db.collection("users").find({ email: email }, function(err, user) {
+        if (err) {
+          return callback(err);
+        }
+        callback(null, user);
+      });
+    },
+
+    //creates a new user
+    createUser: function(user, callback) {
+      db.collection("users").insertOne(user, function(err, index) {
+        if (err) {
+          return callback(err);
+        }
+        callback(null);
+      });
     }
   };
 };

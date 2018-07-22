@@ -1,67 +1,58 @@
 "use strict";
 
-const userHelper = require("../lib/util/user-helper");
-
 const express = require("express");
-const tweetsRoutes = express.Router();
+const bcrypt = require("bcrypt");
+
+const usersRoutes = express.Router();
 
 module.exports = function(DataHelpers) {
-  tweetsRoutes.get("/", function(req, res) {
-    DataHelpers.getTweets((err, tweets) => {
+  usersRoutes.get("/register", function(req, res) {
+    res.render("register");
+  });
+
+  usersRoutes.post("/register", function(req, res) {
+    //checks if user_id exists in cookie, search for user in DB
+    let user_id = req.session.user_id;
+
+    DataHelpers.findUser(user_id, (err, user) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
-        res.json(tweets);
+        //if user is found using registration email
+        if (user) {
+          res.status(500).json({ error: "Email already exists!" });
+        }
       }
     });
-  });
 
-  tweetsRoutes.post("/", function(req, res) {
-    if (!req.body.text) {
-      res.status(400).json({ error: "invalid request: no data in POST body" });
+    if (
+      !req.body.email ||
+      !req.body.password ||
+      !req.body.name ||
+      !req.body.avatar
+    ) {
+      res
+        .status(400)
+        .json({ error: "invalid request: no valid data in POST body" });
       return;
     }
 
-    const user = req.body.user
-      ? req.body.user
-      : userHelper.generateRandomUser();
-    const tweet = {
-      user: user,
-      content: {
-        text: req.body.text
-      },
-      created_at: Date.now(),
-      likes: 0
+    let user = {
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 10),
+      name: req.body.name,
+      avatar: req.body.avatar
     };
 
-    DataHelpers.saveTweet(tweet, err => {
+    DataHelpers.createUser(user, err => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
-        res.status(201).send();
+        req.session.user_id = user.email;
+        res.redirect("/");
       }
     });
   });
 
-  tweetsRoutes.put("/likes", function(req, res) {
-    if (!req.body.id) {
-      res.status(401).json({ error: "invalid request: no data in PUT body" });
-      return;
-    }
-
-    const id = req.body.id;
-    const change = req.body.change;
-
-    DataHelpers.modifyLikes(id, change, err => {
-      if (err) {
-        res.status(500).json({ error: err });
-      } else {
-        res.status(200).send();
-      }
-    });
-
-    res.status(200).send();
-  });
-
-  return tweetsRoutes;
+  return usersRoutes;
 };

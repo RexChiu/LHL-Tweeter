@@ -14,7 +14,6 @@ const MongoClient = require("mongodb").MongoClient;
 const MONGODB_URI = process.env.MONGODB_URI;
 const nodeSassMiddleware = require("node-sass-middleware");
 const cookieSession = require("cookie-session");
-const bcrypt = require("bcrypt");
 
 //middleware
 //scss styling

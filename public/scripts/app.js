@@ -130,7 +130,7 @@ function createTweetElement(tweetObj) {
   var $tweet = $(
     `<article class="tweet" data-id="${escape(tweetObj._id)}">
         <header class="tweet-header">
-            <img src="${escape(tweetObj.user.avatars.regular)}">
+            <img src="${escape(tweetObj.user.avatar)}">
             <span class="tweet-author">${escape(tweetObj.user.name)}</span>
             <span class="tweet-mention">${escape(tweetObj.user.handle)}</span>
         </header>
