@@ -41,18 +41,18 @@ module.exports = function makeDataHelpers(db) {
     },
 
     //checks if user exists in the database
-    findUser: function(email, callback) {
-      if (email === undefined) {
+    findUser: function(handle, callback) {
+      if (handle === undefined) {
         callback(null, null);
       }
 
       //search DB and return results
       //user will be null if does not exist
-      db.collection("users").find({ email: email }, function(err, user) {
+      db.collection("users").findOne({ handle: handle }, function(err, user) {
         if (err) {
           return callback(err);
         }
-        user.toArray(users => callback(null, users));
+        callback(null, user);
       });
     },
 

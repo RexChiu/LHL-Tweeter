@@ -14,53 +14,75 @@ module.exports = function(DataHelpers) {
     res.render("register", templateVars);
   });
 
-  usersRoutes.post("/register", function(req, res) {
-    //checks if user_id exists in cookie, search for user in DB
+  //user attempting to login using credentials
+  usersRoutes.post("/new", function(req, res) {
+    res.error = null;
+    res.success = null;
+
+    //grabs user_id from cookie, validates if user is already logged in
     let user_id = req.session.user_id;
 
+    //searches through database to see user_id exists in database
     DataHelpers.findUser(user_id, (err, user) => {
       if (err) {
         res.status(500).json({ error: err.message });
-        return;
+        res.error = true;
       } else {
-        //if user is found using registration email
+        //if user is found, redirect to index
         if (user) {
-          console.log(user);
-          res.status(500).json({ error: "Email already exists!" });
-          return;
+          console.log("index");
+          res.redirect("index");
+          res.success = true;
         }
       }
     });
 
-    if (
-      !req.body.email ||
-      !req.body.password ||
-      !req.body.handle ||
-      !req.body.avatar
-    ) {
+    //checks if all input fields are present
+    if (!req.body.handle || !req.body.password || !req.body.avatar) {
       res
         .status(400)
         .json({ error: "invalid request: no valid data in POST body" });
+      res.error = true;
       return;
     }
 
+    //breaks out of function if any error or success has been detected
+    if (res.error || res.success) return;
+
+    if (!(res.error || res.success)) {
+      //searches through database to see if handle exists already
+      DataHelpers.findUser(req.body.handle, (err, user) => {
+        if (err) {
+          res.status(500).json({ error: err.message });
+          res.error = true;
+        } else {
+          //if user is found using registration email
+          if (user) {
+            res.status(500).send({ error: "Handle already exists!" });
+            res.error = true;
+          }
+        }
+      });
+    }
+
     let user = {
-      email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, 10),
       handle: req.body.handle,
+      password: bcrypt.hashSync(req.body.password, 10),
       avatar: req.body.avatar
     };
 
-    DataHelpers.createUser(user, err => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      } else {
-        req.session.user_id = user.email;
-        res.redirect("/");
-        return;
-      }
-    });
+    if (!(res.error || res.success)) {
+      DataHelpers.createUser(user, err => {
+        if (err) {
+          res.status(500).json({ error: err.message });
+          res.error = true;
+        } else {
+          req.session.user_id = user.handle;
+          res.success = true;
+          res.redirect("../");
+        }
+      });
+    }
   });
 
   return usersRoutes;

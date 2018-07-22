@@ -55,15 +55,13 @@ db.tweets.insertMany(
 db.users.deleteMany({})
 db.users.insertMany(
 [{
-    "email": "Cats@Cats.Cats",
-    "password": "$2a$10$oWzIoz9BZNEAPU0R2zI3t.skcopb2rt5E3Q7GMIGWeFjhKFJjLBRS",
     "handle": "@Cats",
+    "password": "$2a$10$oWzIoz9BZNEAPU0R2zI3t.skcopb2rt5E3Q7GMIGWeFjhKFJjLBRS",
     "avatar": "https://i.pinimg.com/originals/78/5c/39/785c39aa38a5867388fe432079f7808d.jpg"
   },
   {
-    "email": "Dogs@Dogs.Dogs",
-    "password": "$2a$10$SRFKUDGYxCg.z71oKoww4OXpRgek/lKDuzkk2yooVKCvSOmOuSu7C",
     "handle": "@Dogs",
+    "password": "$2a$10$SRFKUDGYxCg.z71oKoww4OXpRgek/lKDuzkk2yooVKCvSOmOuSu7C",
     "avatar": "https://samoyedlife.com/images/photos/happy-samoyed.jpg"
   }
 ])
