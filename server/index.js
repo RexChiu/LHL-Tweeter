@@ -9,8 +9,9 @@ const app = express();
 const path = require("path");
 
 // Dependencies
+require("dotenv").config();
 const MongoClient = require("mongodb").MongoClient;
-const MONGODB_URI = "mongodb://localhost:27017/tweeter";
+const MONGODB_URI = process.env.MONGODB_URI;
 const nodeSassMiddleware = require("node-sass-middleware");
 
 app.use(
