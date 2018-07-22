@@ -9,7 +9,7 @@ $(document).ready(function() {
 
   getAndRenderTweets();
 
-  //event handler for the form submission
+  //event handler for the new tweet form submission
   $("#submit-new-tweet").on("submit", function(event) {
     event.preventDefault();
 
@@ -20,9 +20,8 @@ $(document).ready(function() {
       .val();
     let $errorMessage = $newTweet.find(".error-message");
 
-    //removes empty space/line breaks from front and end of
-
-    //if empty/null, return true
+    //removes empty space/line breaks from front and end of input
+    //error message handling
     if (!formInput.trim()) {
       $errorMessage.text("Tweet cannot be empty!");
       $errorMessage.slideDown();
@@ -41,6 +40,7 @@ $(document).ready(function() {
       text: formInput
     };
 
+    //sends AJAX post request to server
     $.post("/tweets", data, function(resp, err) {
       if (err !== "success") {
         console.log(err);
@@ -107,6 +107,7 @@ $(document).ready(function() {
   });
 
   //event handler for login button
+  //empties tweets and loads the login page
   $(".nav-bar .login-button").on("click", function(event) {
     $.get("/users/login", (resp, status) => {
       $(".container").empty();
@@ -115,6 +116,7 @@ $(document).ready(function() {
   });
 
   //event handler for register button
+  //empties tweets and loads the register page
   $(".nav-bar .register-button").on("click", function(event) {
     $.get("/users/register", (resp, status) => {
       $(".container").empty();
@@ -123,6 +125,7 @@ $(document).ready(function() {
   });
 
   //event handler for logout button
+  //empties everything and loads the index page
   $(".nav-bar .logout-button").on("click", function(event) {
     $.post("/users/logout", (resp, status) => {
       $("html").empty();
@@ -147,6 +150,7 @@ function renderTweets(tweets) {
   }
 }
 
+//creates a tweet in HTML with a tweet JSON object
 function createTweetElement(tweetObj) {
   //calculates the difference in time for tweet creation
   var timeDiff = new Date().getTime() - tweetObj.created_at;
@@ -155,6 +159,7 @@ function createTweetElement(tweetObj) {
     daysDiff = 0;
   }
 
+  //creates HTML, escapes dangerous characters
   var $tweet = $(
     `<article class="tweet" data-id="${escape(tweetObj._id)}">
         <header class="tweet-header">
@@ -177,6 +182,7 @@ function createTweetElement(tweetObj) {
   return $tweet;
 }
 
+//sends GET request for the list of tweets, and calls function to render it
 function getAndRenderTweets() {
   $.get("/tweets", function(resp, err) {
     if (err !== "success") {

@@ -6,6 +6,8 @@ const bcrypt = require("bcrypt");
 const usersRoutes = express.Router();
 
 module.exports = function(DataHelpers) {
+  // GET /users/login
+  // renders login page
   usersRoutes.get("/login", function(req, res) {
     let templateVars = {
       cookie: req.session
@@ -14,6 +16,8 @@ module.exports = function(DataHelpers) {
     res.render("login", templateVars);
   });
 
+  //GET /users/register
+  // renders register page
   usersRoutes.get("/register", function(req, res) {
     let templateVars = {
       cookie: req.session
@@ -22,7 +26,8 @@ module.exports = function(DataHelpers) {
     res.render("register", templateVars);
   });
 
-  //handles user login
+  // POST /users/login
+  // handles user login, saves encrypted cookie if successful
   usersRoutes.post("/login", function(req, res) {
     let inputHandle = req.body.handle;
     let inputPassword = req.body.password;
@@ -46,6 +51,7 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  // POST /users/logout
   //handles user logout
   usersRoutes.post("/logout", function(req, res) {
     //deletes cookie
@@ -54,53 +60,25 @@ module.exports = function(DataHelpers) {
     res.redirect("../");
   });
 
-  //user attempting to login using credentials
+  // POST /users/register
+  //handles user registration, does not allow for duplicate handles
   usersRoutes.post("/register", function(req, res) {
-    res.error = null;
-    res.success = null;
-
-    //grabs user_id from cookie, validates if user is already logged in
-    let user_id = req.session.user_id;
-
-    //searches through database to see user_id exists in database
-    DataHelpers.findUser(user_id, function(err, user) {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        res.error = true;
-      } else {
-        //if user is found, redirect to index
-        if (user) {
-          res.redirect("../");
-          res.success = true;
-        }
-      }
-    });
-
     //checks if all input fields are present
     if (!req.body.handle || !req.body.password || !req.body.avatar) {
       res
         .status(400)
         .json({ error: "invalid request: no valid data in POST body" });
-      res.error = true;
-      return;
-    }
-
-    //breaks out of function if any error or success has been detected
-    if (res.error || res.success) return;
-
-    if (!res.error && !res.success) {
+    } else {
       //searches through database to see if handle exists already
       DataHelpers.findUser(req.body.handle, function(err, user) {
         if (err) {
           res.status(500).json({ error: err.message });
-          res.error = true;
         } else {
-          //if user is found using registration email
+          //if user is found using registration email, return error
           if (user) {
             res.status(500).send({ error: "Handle already exists!" });
-            res.error = true;
-            return;
           } else {
+            //creates user
             let user = {
               handle: req.body.handle,
               password: bcrypt.hashSync(req.body.password, 10),
@@ -108,21 +86,15 @@ module.exports = function(DataHelpers) {
               avatar: req.body.avatar
             };
 
-            if (!res.error && !res.success) {
-              console.log("should not be here.");
-              console.log(res.error, res.success);
-              DataHelpers.createUser(user, err => {
-                if (err) {
-                  res.status(500).json({ error: err.message });
-                  res.error = true;
-                } else {
-                  req.session.user_id = user.handle;
-                  res.success = true;
-                  res.redirect("../");
-                  return;
-                }
-              });
-            }
+            DataHelpers.createUser(user, err => {
+              if (err) {
+                res.status(500).json({ error: err.message });
+              } else {
+                req.session.user_id = user.handle;
+                res.success = true;
+                res.redirect("../");
+              }
+            });
           }
         }
       });

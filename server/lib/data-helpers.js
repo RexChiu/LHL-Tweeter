@@ -5,9 +5,6 @@ module.exports = function makeDataHelpers(db) {
   return {
     // Saves a tweet to `db`
     saveTweet: function(newTweet, callback) {
-      // db.tweets.push(newTweet);
-      // callback(null, true);
-
       db.collection("tweets").insertOne(newTweet, (err, id) => {
         if (err) {
           return callback(err);
@@ -29,7 +26,7 @@ module.exports = function makeDataHelpers(db) {
         });
     },
 
-    // Changes the like count of selected tweet using mongodb update() and $inc
+    // Changes the like count of selected tweet
     modifyLikes: function(id, change, callback) {
       var ObjectID = require("mongodb").ObjectID(id);
 

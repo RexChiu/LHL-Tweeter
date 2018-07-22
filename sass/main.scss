@@ -2,3 +2,5 @@
 @import "nav";
 @import "new-tweet";
 @import "tweet";
+
+/* technically this is using SCSS by merging all 4 files and serving one big main.css file to browser... */

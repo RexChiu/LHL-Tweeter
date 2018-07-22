@@ -7,7 +7,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
-const morgan = require("morgan");
 
 // Dependencies
 require("dotenv").config();
@@ -17,7 +16,6 @@ const nodeSassMiddleware = require("node-sass-middleware");
 const cookieSession = require("cookie-session");
 
 //middleware
-app.use(morgan("dev"));
 //scss styling
 app.use(
   "/styles",
@@ -64,6 +62,7 @@ MongoClient.connect(
   }
 );
 
+// serves main page
 app.get("/", (req, res) => {
   let templateVars = {
     cookie: req.session
