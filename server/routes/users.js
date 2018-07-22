@@ -37,7 +37,7 @@ module.exports = function(DataHelpers) {
         //compares hashed password with one stored in db
         if (bcrypt.compareSync(inputPassword, user.password)) {
           req.session.user_id = user.handle;
-          res.redirect("../index");
+          res.redirect("../");
           return;
         } else {
           res.status(500).send("Wrong Password!");
