@@ -22,6 +22,23 @@ module.exports = function(DataHelpers) {
       return;
     }
 
+    //grabs user_id from cookie, validates if user is already logged in
+    let user_id = req.session.user_id;
+
+    //searches through database to see user_id exists in database
+    DataHelpers.findUser(user_id, function(err, user) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        res.error = true;
+      } else {
+        //if user is found, redirect to index
+        if (user) {
+          res.redirect("../");
+          res.success = true;
+        }
+      }
+    });
+
     const user = req.body.user
       ? req.body.user
       : userHelper.generateRandomUser();

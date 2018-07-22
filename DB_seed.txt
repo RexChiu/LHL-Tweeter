@@ -57,11 +57,13 @@ db.users.insertMany(
 [{
     "handle": "@Cats",
     "password": "$2a$10$oWzIoz9BZNEAPU0R2zI3t.skcopb2rt5E3Q7GMIGWeFjhKFJjLBRS",
+    "name": "Cats",
     "avatar": "https://i.pinimg.com/originals/78/5c/39/785c39aa38a5867388fe432079f7808d.jpg"
   },
   {
     "handle": "@Dogs",
     "password": "$2a$10$SRFKUDGYxCg.z71oKoww4OXpRgek/lKDuzkk2yooVKCvSOmOuSu7C",
+    "name": "Dogs",
     "avatar": "https://samoyedlife.com/images/photos/happy-samoyed.jpg"
   }
 ])

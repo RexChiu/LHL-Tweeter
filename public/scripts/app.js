@@ -37,7 +37,11 @@ $(document).ready(function() {
       $errorMessage.slideUp();
     }
 
-    $.post("/tweets", $(this).serialize(), function(resp, err) {
+    let data = {
+      text: formInput
+    };
+
+    $.post("/tweets", data, function(resp, err) {
       if (err !== "success") {
         console.log(err);
       } else {

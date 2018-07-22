@@ -104,6 +104,7 @@ module.exports = function(DataHelpers) {
             let user = {
               handle: req.body.handle,
               password: bcrypt.hashSync(req.body.password, 10),
+              name: req.body.name,
               avatar: req.body.avatar
             };
 
