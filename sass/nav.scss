@@ -32,7 +32,8 @@
 
 .nav-bar .compose-button,
 .login-button,
-.register-button {
+.register-button,
+.logout-button {
   cursor: pointer;
   justify-content: flex-end;
   margin: 0.5em;
@@ -49,7 +50,8 @@
 
 .nav-bar .compose-button:hover,
 .login-button:hover,
-.register-button:hover {
+.register-button:hover,
+.logout-button:hover {
   background-color: white;
   color: black;
 }

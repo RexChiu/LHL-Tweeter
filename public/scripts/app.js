@@ -117,6 +117,14 @@ $(document).ready(function() {
       $(".container").append(resp);
     });
   });
+
+  //event handler for logout button
+  $(".nav-bar .logout-button").on("click", function(event) {
+    $.post("/users/logout", (resp, status) => {
+      $("html").empty();
+      $("html").append(resp);
+    });
+  });
 });
 
 function renderTweets(tweets) {

@@ -46,6 +46,14 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  //handles user logout
+  usersRoutes.post("/logout", function(req, res) {
+    //deletes cookie
+    req.session = null;
+
+    res.redirect("../");
+  });
+
   //user attempting to login using credentials
   usersRoutes.post("/register", function(req, res) {
     res.error = null;
@@ -62,8 +70,7 @@ module.exports = function(DataHelpers) {
       } else {
         //if user is found, redirect to index
         if (user) {
-          console.log("index");
-          res.redirect("index");
+          res.redirect("../");
           res.success = true;
         }
       }
