@@ -30,7 +30,9 @@
   flex-grow: 1;
 }
 
-.nav-bar .compose-button {
+.nav-bar .compose-button,
+.login-button,
+.register-button {
   cursor: pointer;
   justify-content: flex-end;
   margin: 0.5em;
@@ -45,7 +47,9 @@
   color: #00a087;
 }
 
-.nav-bar .compose-button:hover {
+.nav-bar .compose-button:hover,
+.login-button:hover,
+.register-button:hover {
   background-color: white;
   color: black;
 }
