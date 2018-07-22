@@ -23,7 +23,7 @@ module.exports = function(DataHelpers) {
     let user_id = req.session.user_id;
 
     //searches through database to see user_id exists in database
-    DataHelpers.findUser(user_id, (err, user) => {
+    DataHelpers.findUser(user_id, function(err, user) {
       if (err) {
         res.status(500).json({ error: err.message });
         res.error = true;
@@ -49,9 +49,9 @@ module.exports = function(DataHelpers) {
     //breaks out of function if any error or success has been detected
     if (res.error || res.success) return;
 
-    if (!(res.error || res.success)) {
+    if (!res.error && !res.success) {
       //searches through database to see if handle exists already
-      DataHelpers.findUser(req.body.handle, (err, user) => {
+      DataHelpers.findUser(req.body.handle, function(err, user) {
         if (err) {
           res.status(500).json({ error: err.message });
           res.error = true;
@@ -71,7 +71,9 @@ module.exports = function(DataHelpers) {
       avatar: req.body.avatar
     };
 
-    if (!(res.error || res.success)) {
+    if (!res.error && !res.success) {
+      console.log("should not be here.");
+      console.log(res.error, res.success);
       DataHelpers.createUser(user, err => {
         if (err) {
           res.status(500).json({ error: err.message });
