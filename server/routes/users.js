@@ -15,7 +15,7 @@ module.exports = function(DataHelpers) {
   });
 
   //user attempting to login using credentials
-  usersRoutes.post("/new", function(req, res) {
+  usersRoutes.post("/register", function(req, res) {
     res.error = null;
     res.success = null;
 
@@ -60,28 +60,30 @@ module.exports = function(DataHelpers) {
           if (user) {
             res.status(500).send({ error: "Handle already exists!" });
             res.error = true;
+            return;
+          } else {
+            let user = {
+              handle: req.body.handle,
+              password: bcrypt.hashSync(req.body.password, 10),
+              avatar: req.body.avatar
+            };
+
+            if (!res.error && !res.success) {
+              console.log("should not be here.");
+              console.log(res.error, res.success);
+              DataHelpers.createUser(user, err => {
+                if (err) {
+                  res.status(500).json({ error: err.message });
+                  res.error = true;
+                } else {
+                  req.session.user_id = user.handle;
+                  res.success = true;
+                  res.redirect("../");
+                  return;
+                }
+              });
+            }
           }
-        }
-      });
-    }
-
-    let user = {
-      handle: req.body.handle,
-      password: bcrypt.hashSync(req.body.password, 10),
-      avatar: req.body.avatar
-    };
-
-    if (!res.error && !res.success) {
-      console.log("should not be here.");
-      console.log(res.error, res.success);
-      DataHelpers.createUser(user, err => {
-        if (err) {
-          res.status(500).json({ error: err.message });
-          res.error = true;
-        } else {
-          req.session.user_id = user.handle;
-          res.success = true;
-          res.redirect("../");
         }
       });
     }
