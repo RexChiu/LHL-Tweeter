@@ -104,19 +104,17 @@ $(document).ready(function() {
 
   //event handler for login button
   $(".nav-bar .login-button").on("click", function(event) {
-    $.get("/users/login");
+    $.get("/users/login", (resp, status) => {
+      $(".container").empty();
+      $(".container").append(resp);
+    });
   });
 
   //event handler for register button
   $(".nav-bar .register-button").on("click", function(event) {
     $.get("/users/register", (resp, status) => {
-      if (status === "success") {
-        $(".container").empty();
-        $(".container").append(resp);
-      } else {
-        $(".container").empty();
-        $(".container").append(resp);
-      }
+      $(".container").empty();
+      $(".container").append(resp);
     });
   });
 });

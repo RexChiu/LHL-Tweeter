@@ -6,6 +6,14 @@ const bcrypt = require("bcrypt");
 const usersRoutes = express.Router();
 
 module.exports = function(DataHelpers) {
+  usersRoutes.get("/login", function(req, res) {
+    let templateVars = {
+      cookie: req.session
+    };
+
+    res.render("login", templateVars);
+  });
+
   usersRoutes.get("/register", function(req, res) {
     let templateVars = {
       cookie: req.session
