@@ -52,7 +52,7 @@ module.exports = function makeDataHelpers(db) {
         if (err) {
           return callback(err);
         }
-        callback(null, user);
+        user.toArray(users => callback(null, users));
       });
     },
 

@@ -7,7 +7,11 @@ const usersRoutes = express.Router();
 
 module.exports = function(DataHelpers) {
   usersRoutes.get("/register", function(req, res) {
-    res.render("register");
+    let templateVars = {
+      cookie: req.session
+    };
+
+    res.render("register", templateVars);
   });
 
   usersRoutes.post("/register", function(req, res) {
@@ -17,10 +21,13 @@ module.exports = function(DataHelpers) {
     DataHelpers.findUser(user_id, (err, user) => {
       if (err) {
         res.status(500).json({ error: err.message });
+        return;
       } else {
         //if user is found using registration email
         if (user) {
+          console.log(user);
           res.status(500).json({ error: "Email already exists!" });
+          return;
         }
       }
     });
@@ -28,7 +35,7 @@ module.exports = function(DataHelpers) {
     if (
       !req.body.email ||
       !req.body.password ||
-      !req.body.name ||
+      !req.body.handle ||
       !req.body.avatar
     ) {
       res
@@ -40,16 +47,18 @@ module.exports = function(DataHelpers) {
     let user = {
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 10),
-      name: req.body.name,
+      handle: req.body.handle,
       avatar: req.body.avatar
     };
 
     DataHelpers.createUser(user, err => {
       if (err) {
         res.status(500).json({ error: err.message });
+        return;
       } else {
         req.session.user_id = user.email;
         res.redirect("/");
+        return;
       }
     });
   });
