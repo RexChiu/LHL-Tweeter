@@ -66,3 +66,18 @@ db.tweets.insertMany(
 	"likes": 3
   }
 ])
+
+
+db.users.deleteMany({})
+db.users.insertMany(
+[{
+    "email": "Cats@Cats.Cats",
+    "handle": "@Cats",
+    "password": "$2a$10$oWzIoz9BZNEAPU0R2zI3t.skcopb2rt5E3Q7GMIGWeFjhKFJjLBRS"
+  },
+  {
+    "email": "Dogs@Dogs.Dogs",
+    "handle": "@Dogs",
+    "password": "$2a$10$SRFKUDGYxCg.z71oKoww4OXpRgek/lKDuzkk2yooVKCvSOmOuSu7C"
+  }
+])

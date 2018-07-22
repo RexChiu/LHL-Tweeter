@@ -13,7 +13,11 @@ require("dotenv").config();
 const MongoClient = require("mongodb").MongoClient;
 const MONGODB_URI = process.env.MONGODB_URI;
 const nodeSassMiddleware = require("node-sass-middleware");
+const cookieSession = require("cookie-session");
+const bcrypt = require("bcrypt");
 
+//middleware
+//scss styling
 app.use(
   "/styles",
   nodeSassMiddleware({
@@ -23,10 +27,19 @@ app.use(
     outputStyle: "expanded"
   })
 );
+//view engine
+app.set("view engine", "ejs");
 
 app.use(express.static("public"));
-
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["Cats Rule The World"],
+
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  })
+);
 
 //Connect to MongoDB, once connected, pass through to DataHelpers
 MongoClient.connect(
