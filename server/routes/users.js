@@ -22,6 +22,30 @@ module.exports = function(DataHelpers) {
     res.render("register", templateVars);
   });
 
+  //handles user login
+  usersRoutes.post("/login", function(req, res) {
+    let inputHandle = req.body.handle;
+    let inputPassword = req.body.password;
+
+    //finds username in database
+    DataHelpers.findUser(inputHandle, function(err, user) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else if (!user) {
+        res.status(500).send("No User Found!");
+      } else {
+        //compares hashed password with one stored in db
+        if (bcrypt.compareSync(inputPassword, user.password)) {
+          req.session.user_id = user.handle;
+          res.redirect("../index");
+          return;
+        } else {
+          res.status(500).send("Wrong Password!");
+        }
+      }
+    });
+  });
+
   //user attempting to login using credentials
   usersRoutes.post("/register", function(req, res) {
     res.error = null;
