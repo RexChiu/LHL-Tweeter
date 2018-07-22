@@ -64,7 +64,11 @@ MongoClient.connect(
 );
 
 app.get("/", (req, res) => {
-  res.render("index");
+  let templateVars = {
+    cookie: req.session
+  };
+
+  res.render("index", templateVars);
 });
 
 app.listen(process.env.PORT || PORT, () => {
