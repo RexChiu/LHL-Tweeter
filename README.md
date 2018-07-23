@@ -4,6 +4,14 @@ Tweeter is a simple, single-page Twitter clone.
 
 This repository is built on top of the starter code provided by Lighthouse Labs: The objective of this project is to build upon the HTML, CSS, JS, jQuery, AJAX front-end calls, and the Node, Express and MongoDB back-end components.
 
+## Final Product
+
+!["Screenshot of Main page"](https://github.com/RexChiu/LHL-Tweeter/blob/master/docs/main-screen.png)
+!["Screenshot of Login page"](https://github.com/RexChiu/LHL-Tweeter/blob/master/docs/login-page.png)
+!["Screenshot of Register page"](https://github.com/RexChiu/LHL-Tweeter/blob/master/docs/register-page.png)
+!["Screenshot of Tweet Highlight"](https://github.com/RexChiu/LHL-Tweeter/blob/master/docs/highlight-tweet.png)
+!["Screenshot of Compose Tweet"](https://github.com/RexChiu/LHL-Tweeter/blob/master/docs/compose-tweet.png)
+
 ## Dependencies
 
 - Node.js 5.10.x or above
